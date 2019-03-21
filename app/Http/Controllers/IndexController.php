@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Model\Goods;
+
+class IndexController extends Controller
+{
+    public function index()
+    {
+        $res = Goods::get();
+        return  view('index',['res'=>$res]);
+    }
+    public function indexlist()
+    {
+        $res=Goods::get();
+    }
+}
