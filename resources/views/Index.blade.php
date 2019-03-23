@@ -63,12 +63,14 @@
 		  <!--分类-->
 		  <div class="index-menu thin-bor-top thin-bor-bottom">
             <ul class="menu-list">
+				@foreach($data as $v)
                 <li>
-                    <a href="javascript:;" id="btnNew">
+                    <a href="{{url('all/allshop')}}" id="btnNew">
                         <i class="xinpin"></i>
-                        <span class="title">新品</span>
+                        <span class="title">{{$v->cate_name}}</span>
                     </a>
                 </li>
+				@endforeach
             </ul>
         </div>
         <!--导航-->
@@ -208,7 +210,7 @@
             			<div class="gRate" codeid="12751965" goods_id="{{$v->goods_id}}" canbuy="58" >
             				<a href="javascript:;"></a>
             			</div>
-            		</div>
+		</div>
             	</li>
 				@endforeach
                     <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token()?>">
@@ -222,7 +224,6 @@
     <ul>
         <li class="f_home"><a href="{{url('index/index')}}" class="hover"><i></i>潮购</a></li>
         <li class="f_announced"><a href="{{url('all/allshop')}}" ><i></i>所有商品</a></li>
-        <li class="f_single"><a href="{{url('share/share')}}" ><i></i>最新揭晓</a></li>
         <li class="f_car"><a id="btnCart" href="{{url('shop/shopcart')}}" ><i></i>购物车</a></li>
         <li class="f_personal"><a href="{{url('user/userpage')}}" ><i></i>我的潮购</a></li>
     </ul>
@@ -265,6 +266,7 @@
                                     location.href="{{url('login/login')}}"
                                 })
                             }
+							//console.log(res)
                         }
                     )
                 })

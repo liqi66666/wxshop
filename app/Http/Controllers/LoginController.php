@@ -21,7 +21,8 @@ class LoginController extends Controller
         }else{
             $pwd=decrypt($res['rigister_pwd']);
             if($rigister_pwd==$pwd){
-                session(['id'=>$res['rigister_id'],'register_tel'=>$rigister_tel]);
+                session(['id'=>$res['rigister_id'],'rigister_tel'=>$rigister_tel]);
+
                 echo 3;
             }else{
                 echo 2;

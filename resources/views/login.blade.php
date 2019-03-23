@@ -14,7 +14,6 @@
     <script src="{{url('js/jquery-1.8.3.min.js')}}" language="javascript" type="text/javascript"></script>
 </head>
 <body>
-    
 <!--触屏版内页头部-->
 <div class="m-block-header" id="div-header">
     <strong id="m-title">登录</strong>

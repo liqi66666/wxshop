@@ -37,7 +37,6 @@
             </div>
             <a href="javascript:;" class="s-btn" id="btnSearch">搜索</a>
         </div>
-
         <!--搜索时显示的模块-->
         <div class="search-info" style="display: none;">
             <div class="hot">
@@ -64,12 +63,12 @@
                         <span class='items'>全部商品</span></li>
                     @foreach($data as $v)
                     <li sortid='100' reletype='1' linkaddr=''>
-                        <span  cate_id="{{$v->cate_id}}" class='items'>{{$v->cate_name}}</span></li>
+                        <span  class='items' cate_id="{{$v->cate_id}}">{{$v->cate_name}}
+                        </span></li>
                     @endforeach
                 </ul>
-
             </div>
-
+            </div>
             <div class="good-list-wrapper">
                 <div class="good-menu thin-bor-bottom">
                     <ul class="good-menu-list" id="ulOrderBy">
@@ -88,13 +87,10 @@
                                 @foreach($res as $v)
                                 <li id="23468">    
                                     <span class="gList_l fl">
-                                    <a href="{{url('shop/shopcontent')}}/{{$v->goods_id}}" >
+                                    <a href="{{url('shop/shopcontent')}}/{{$v->goods_id}}" ></a>
                                        <img class="lazy" name="goodsImg"  src="{{url('/goodsLogo\\')}}{{$v->goods_img}}" >
                                     </span>
-
                                     <div class="gList_r">
-
-
                                         <h3 class="gray6">{{$v->goods_name}}</h3>
                                         </a>
                                         <em class="gray9">价值：￥{{$v->self_price}}</em>
@@ -137,12 +133,13 @@
         </div>
     </div>
 </div>
+
 <script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
 <script src="{{url('layui/layui.js')}}"></script>
 <script src="{{url('js/lazyload.min.js')}}"></script>
 <script src="{{url('js/mui.min.js')}}"></script>
 <script>
-   
+
         jQuery(document).ready(function(){
             $("img.lazy").lazyload({
                 placeholder : "images/loading2.gif",
@@ -151,7 +148,7 @@
 
 
         });
-    
+
 </script>
 <script>
     // 点击切换类别

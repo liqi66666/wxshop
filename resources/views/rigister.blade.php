@@ -33,8 +33,8 @@
                     </dl>
                     <dl>
                         <s class="password"></s>
-                        <input class="pwd" maxlength="11" type="text"  name="rigiter_pwd" placeholder="6-16位数字、字母组成" value="" />
-                        <input class="pwd" maxlength="11" type="password"  name="rigiter_pwd" placeholder="6-16位数字、字母组成" value="" style="display: none" />
+                        <input class="pwd" maxlength="11" type="text"  name="rigister_pwd" placeholder="6-16位数字、字母组成" value="" />
+                        <input class="pwd" maxlength="11" type="password"  name="rigister_pwd" placeholder="6-16位数字、字母组成" value="" style="display: none" />
                         <span class="mr clear">x</span>
                         <s class="eyeclose"></s>
                     </dl>
@@ -101,7 +101,6 @@
                 that.parents('dl').find('input:visible').val("");
                 $(this).hide();
             })
-
         }else{
            that.siblings('span.clear').hide();
         }
@@ -211,7 +210,7 @@
                 function(res){
                     if(res==1){
                         layer.msg('注册成功',function(){
-                            location.href="{{url('login')}}";
+                            location.href="{{url('login/login')}}";
                         });
                     }else if(res==2){
                         layer.msg('注册失败');

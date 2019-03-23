@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,36 +9,35 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/welcome', function () {
-    return view('views.welcome');
-});
-Route::prefix('index')->group(function () {
+Route::get('/','IndexController@index');
+Route::prefix('index')->group(function(){
     route::any('index', 'IndexController@index');
     route::any('indexlist', 'IndexController@indexlist');
 });
-Route::prefix('shop')->group(function () {
+Route::prefix('shop')->group(function(){
     route::any('shopcart','ShopController@shopcart');
-    route::any('shopcontent/{goods_id}', 'ShopController@shopcontent');
+    route::any('shopcontent/{goods_id}','ShopController@shopcontent');
     route::any('cartadd','ShopController@cartadd');
     route::any('buycar','ShopController@buycar');
-
+    route::any('delcart','ShopController@delcart');
+    route::any('somedel','ShopController@somedel');
 });
 Route::prefix('all')->group(function () {
     route::any('allshop', 'AllController@allshop');
     route::any('allshopdo', 'AllController@allshopdo');
+
 });
 Route::prefix('share')->group(function () {
     route::any('willshare', 'ShareController@willshare');
-    route::any('share', 'ShareController@share');
+    route::any('share', 'Sh areController@share');
 });
 Route::prefix('login')->group(function () {
     route::any('login', 'LoginController@login');
     route::any('logindo', 'LoginController@logindo');
-
 });
 Route::prefix('user')->group(function () {
     route::any('userpage', 'UserController@userpage');
+    route::any('writeaddr', 'UserController@writeaddr');
 });
 Route::prefix('rigister')->group(function () {
     route::any('rigister', 'RigisterController@rigister');
@@ -47,5 +45,3 @@ Route::prefix('rigister')->group(function () {
     route::any('doregister', 'RigisterController@doregister');
 });
 route::any('verify/create', 'CaptchaController@create');
-
-

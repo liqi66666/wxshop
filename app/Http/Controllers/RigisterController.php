@@ -33,11 +33,18 @@ class RigisterController extends Controller
         }else{
             $arr = $request->all();
             $rigister_name=$request->rigister_name;
-            $rigister_pwd=$request->rigister_pwd;
+            $rigister_pwd=encrypt($request->rigister_pwd);
+            //dump($rigister_pwd);die;
             $rigister_pwd1=$request->rigister_pwd1;
             $rigister_tel=$request->rigister_tel;
+            $arr['rigister_pwd']=$rigister_pwd;
             unset($arr['_token']);
-            $res=rigister::insert($arr);
+                $res=rigister::insert($arr);
+            if($res){
+                echo 1;
+            }else{
+                echo 2;
+            }
         }
 
 
