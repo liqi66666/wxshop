@@ -54,11 +54,14 @@ class UserController extends Controller
 
     }
     //地址列表
-    public function address()
+    public function address(Request$request)
     {
-
         $rigister_id=session('id');
-        $res=Address::get();
+        $data=[
+            'rigister_id'=>$rigister_id
+        ];
+        //dd($rigister_id);
+        $res=Address::where($data)->get();
         return view('address',['res'=>$res]);
     }
     //删除地址
