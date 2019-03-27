@@ -51,8 +51,6 @@
                 </div>
             </li>
                 @endforeach
-
-
         </ul>
         <div id="divNone" class="empty "  style="display: none"><s></s><p>您的购物车还是空的哦~</p><a href="https://m.1yyg.com" class="orangeBtn">立即潮购</a></div>
     </div>
@@ -67,110 +65,16 @@
             </dt>
             <dd>
                 <a href="javascript:;" id="a_payment"   class="remove" class="orangeBtn w_account remove">删除</a>
-                <a href="javascript:;" id="a_payment" class="orangeBtn w_account">去结算</a>
+                <a href="javascript:;" id="a_payment" class="payment" class="orangeBtn w_account">去结算</a>
             </dd>
 
         </dl>
     </div>
-    <div class="hot-recom">
-        <div class="title thin-bor-top gray6">
-            <span><b class="z-set"></b>人气推荐</span>
-            <em></em>
-        </div>
-        <div class="goods-wrap thin-bor-top">
-            <ul class="goods-list clearfix">
-                <li>
-                    <a href="https://m.1yyg.com/v44/products/23458.do" class="g-pic">
-                        <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                    </a>
-                    <p class="g-name">
-                        <a href="https://m.1yyg.com/v44/products/23458.do">(第<i>368671</i>潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                    </p>
-                    <ins class="gray9">价值:￥7130</ins>
-                    <div class="btn-wrap">
-                        <div class="Progress-bar">
-                            <p class="u-progress">
-                                    <span class="pgbar" style="width:1%;">
-                                        <span class="pging"></span>
-                                    </span>
-                            </p>
-                        </div>
-                        <div class="gRate" data-productid="23458">
-                            <a href="javascript:;"><s></s></a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <a href="" class="g-pic">
-                        <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                    </a>
-                    <p class="g-name">
-                        <a href="https://m.1yyg.com/v44/products/23458.do">(第368671潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                    </p>
-                    <ins class="gray9">价值:￥7130</ins>
-                    <div class="btn-wrap">
-                        <div class="Progress-bar">
-                            <p class="u-progress">
-                                    <span class="pgbar" style="width:45%;">
-                                        <span class="pging"></span>
-                                    </span>
-                            </p>
-                        </div>
-                        <div class="gRate" data-productid="23458">
-                            <a href="javascript:;"><s></s></a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <a href="https://m.1yyg.com/v44/products/23458.do" class="g-pic">
-                        <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                    </a>
-                    <p class="g-name">
-                        <a href="https://m.1yyg.com/v44/products/23458.do">(第<i>368671</i>潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                    </p>
-                    <ins class="gray9">价值:￥7130</ins>
-                    <div class="btn-wrap">
-                        <div class="Progress-bar">
-                            <p class="u-progress">
-                                    <span class="pgbar" style="width:1%;">
-                                        <span class="pging"></span>
-                                    </span>
-                            </p>
-                        </div>
-                        <div class="gRate" data-productid="23458">
-                            <a href="javascript:;"><s></s></a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <a href="https://m.1yyg.com/v44/products/23458.do" class="g-pic">
-                        <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                    </a>
-                    <p class="g-name">
-                        <a href="https://m.1yyg.com/v44/products/23458.do">(第368671潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                    </p>
-                    <ins class="gray9">价值:￥7130</ins>
-                    <div class="btn-wrap">
-                        <div class="Progress-bar">
-                            <p class="u-progress">
-                                    <span class="pgbar" style="width:1%;">
-                                        <span class="pging"></span>
-                                    </span>
-                            </p>
-                        </div>
-                        <div class="gRate" data-productid="23458">
-                            <a href="javascript:;"><s></s></a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+
     <div class="footer clearfix">
         <ul>
             <li class="f_home"><a href="{{url('index/index')}}" class="hover"><i></i>潮购</a></li>
             <li class="f_announced"><a href="{{url('all/allshop')}}" ><i></i>所有商品</a></li>
-            <li class="f_single"><a href="{{url('share/share')}}" ><i></i>最新揭晓</a></li>
             <li class="f_car"><a id="btnCart" href="{{url('shop/shopcart')}}" ><i></i>购物车</a></li>
             <li class="f_personal"><a href="{{url('user/userpage')}}" ><i></i>我的潮购</a></li>
         </ul>
@@ -247,7 +151,6 @@
                 function(res){
                     if(res==1){
                         alert('删除成功');
-
                         // layer.msg('删除成功',{icon:1,time:3000},function(){
                             history.go(0);
                         // })
@@ -297,6 +200,24 @@
 
             $(".total").html('<span>￥</span>'+(conts)*(prices).toFixed(2));
         }
+        //结算
+        $('.payment').click(function(){
+            var cart_id='';
+            $('.current').each(function(){
+                cart_id+=$(this).attr('cart_id')+',';
+            })
+
+            $.post(
+                "/shop/pay",
+                {_token:'{{csrf_token()}}',cart_id:cart_id},
+                function(res){
+                    console.log(res);
+
+                    location.href='/shop/payment/'+res;
+
+                }
+            )
+        })
         GetCount();
     </script>
 </body>

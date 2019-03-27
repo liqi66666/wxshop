@@ -2,7 +2,7 @@
     <div id="pullrefresh" class="good-list-box  mui-content mui-scroll-wrapper">
         <div class="goodList mui-scroll">
             <ul id="ulGoodsList" class="mui-table-view mui-table-view-chevron">
-                @foreach($goods_data as $v)
+                @foreach($res as $v)
                     <li id="23468">
                                     <span class="gList_l fl">
                                        <img class="lazy" name="goodsImg"  src="{{url('/goodsLogo\\')}}{{$v->goods_img}}"/>
@@ -28,7 +28,6 @@
                         </div>
                     </li>
                 @endforeach
-
             </ul>
         </div>
     </div>

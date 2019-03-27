@@ -19,7 +19,7 @@
 <div class="m-block-header" id="div-header">
     <strong id="m-title">填写收货地址</strong>
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
-    <a href="/" class="m-index-icon">保存</a>
+    <a href="#" id="save" class="m-index-icon">保存</a>
 </div>
 <div class=""></div>
 <!-- <form class="layui-form" action="">
@@ -29,13 +29,16 @@
 <form class="layui-form" action="">
   <div class="addrcon">
     <ul>
-      <li><em>收货人</em><input type="text" placeholder="请填写真实姓名"></li>
-      <li><em>手机号码</em><input type="number" placeholder="请输入手机号"></li>
-      <li><em>所在区域</em><input id="demo1" type="text" readonly="" name="input_area" placeholder="请选择所在区域"></li>
-      <li class="addr-detail"><em>详细地址</em><input type="text" placeholder="20个字以内" class="addr"></li>
+      <li><em>收货人</em><input type="text" id="address_name" name="address_name" placeholder="请填写真实姓名"></li>
+      <li><em>手机号码</em><input type="number"   id="address_tel"name="address_tel" placeholder="请输入手机号"></li>
+      <li><em>所在区域</em><input id="demo1" type="text"  class="city"  name="city"  placeholder="请选择所在区域"></li>
+      <li class="addr-detail"><em>详细地址</em><input type="text" id="address_test"  name="address_test" placeholder="20个字以内" class="addr"></li>
     </ul>
-    <div class="setnormal"><span>设为默认地址</span><input type="checkbox" name="xxx" lay-skin="switch">  </div>
+    <div class="setnormal"><span>设为默认地址</span>
+        <input type="checkbox" id="checked" name="is_default" lay-skin="switch">
+    </div>
   </div>
+    <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token()?>">
 </form>
 
 <!-- SUI mobile -->
@@ -44,7 +47,38 @@
 <script src="{{url('dist/js/LAreaData2.js')}}"></script>
 <script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
 <script src="{{url('layui/layui.js')}}"></script>
-
+<script>
+    $(function(){
+        $(document).on('click',"#save",function () {
+            var obj={};
+            obj.address_name = $("#address_name").val();
+            obj.address_tel = $("#address_tel").val();
+            obj.city = $(".city").val();
+            obj.address_test = $("#address_test").val();
+            var is_default = $("#checked").prop('is_default');
+            var _token = $("#_token").val();
+            var checked=$('#checked').prop('checked');
+            if(checked==true){
+                obj.is_default = 1;
+            }else{
+                obj.is_default = 2;
+            }
+            $.post(
+                "{{url('user/writeaddrdo')}}",
+                {obj:obj,_token:_token},
+                function(res){
+                    if(res==1){
+                        layer.msg('加入地址成功',{time:2000},function(){
+                            location.href="{{url('user/address')}}";
+                        });
+                    }else{
+                        layer.msg('加入地址失败', {icon: 2});
+                    }
+                }
+            )
+        })
+    })
+</script>
 <script>
   //Demo
 layui.use('form', function(){
@@ -55,6 +89,7 @@ layui.use('form', function(){
     layer.msg(JSON.stringify(data.field));
     return false;
   });
+
 });
 
 

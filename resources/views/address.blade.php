@@ -8,96 +8,98 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link href="css/comm.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/address.css">
-    <link rel="stylesheet" href="css/sm.css">
-  
-   
-    
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{url('css/address.css')}}">
+    <link rel="stylesheet" href="{{url('css/sm.css')}}">
 </head>
 <body>
-    
 <!--触屏版内页头部-->
 <div class="m-block-header" id="div-header">
     <strong id="m-title">地址管理</strong>
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
-    <a href="/" class="m-index-icon">添加</a>
+    <a href="{{url('user/writeaddr')}}" class="m-index-icon">添加</a>
 </div>
 <div class="addr-wrapp">
-    <div class="addr-list">
+    @foreach($res as $v)
+    <div class="addr-list" >
          <ul>
-            <li class="clearfix">
-                <span class="fl">兰兰</span>
-                <span class="fr">15034008459</span>
+                 <input type="hidden" value="{{$v->address_id}}" class="address_id">
+            <li class="clearfix"  >
+                <span class="fr">{{$v->address_tel}}</span>
+
             </li>
             <li>
-                <p>北京市东城区起来我来了</p>
+                <p>{{$v->address_name}}</p>
+                <p>{{$v->address_test}}</p>
             </li>
-            <li class="a-set">
-                <s class="z-set" style="margin-top: 6px;"></s>
-                <span>设为默认</span>
+            <li class="a-set" >
+                @if($v->is_default==1)
+                    <s class="z-set" style="margin-top: 6px;"></s>
+                    <span class="moren">已默认</span>
+                @else
+                    <s class="z-defalt" style="margin-top: 6px;"></s>
+                    <span class="moren">设为默认</span>
+                @endif
+
                 <div class="fr">
-                    <span class="edit">编辑</span>
-                    <span class="remove">删除</span>
+                    <span class="edit" address_id={{$v->address_id}}>编辑</span>
+                    <span class="remove" address_id={{$v->address_id}}>删除</span>
                 </div>
             </li>
+
         </ul>  
     </div>
-    <div class="addr-list">
-         <ul>
-            <li class="clearfix">
-                <span class="fl">兰兰</span>
-                <span class="fr">15034008459</span>
-            </li>
-            <li>
-                <p>北京市东城区起来我来了</p>
-            </li>
-            <li class="a-set">
-                <s class="z-defalt" style="margin-top: 6px;"></s>
-                <span>设为默认</span>
-                <div class="fr">
-                    <span class="edit">编辑</span>
-                    <span class="remove">删除</span>
-                </div>
-            </li>
-        </ul>  
-    </div>
-   
+    @endforeach
+
+        <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token()?>">
 </div>
-
-
-<script src="js/zepto.js" charset="utf-8"></script>
-<script src="js/sm.js"></script>
-<script src="js/sm-extend.js"></script>
-
-
+<script src="{{url('js/zepto.js')}}" charset="utf-8"></script>
+<script src="{{url('js/sm.js')}}"></script>
+<script src="{{url('js/sm-extend.js')}}"></script>
 <!-- 单选 -->
 <script>
-    
-
-     // 删除地址
-    $(document).on('click','span.remove', function () {
-        var buttons1 = [
-            {
-              text: '删除',
-              bold: true,
-              color: 'danger',
-              onClick: function() {
-                $.alert("您确定删除吗？");
-              }
+    //删除
+    $(document).on('click','.remove',function(){
+        var address_id=$(this).attr('address_id');
+        var _token=$('#_token').val();
+        $.post(
+            "{{url('user/addressdel')}}",
+            {address_id:address_id,_token:_token},
+            function(res){
+                if(res==1){
+                    alert('删除成功');
+                    // layer.msg('删除成功',{icon:1,time:3000},function(){
+                    history.go(0);
+                    // })
+                }else{
+                    alert('删除失败');
+                    // layer.msg('删除失败',{icoon:2})
+                }
             }
-          ];
-          var buttons2 = [
-            {
-              text: '取消',
-              bg: 'danger'
+        )
+    })
+    //修改
+    $(document).on('click','.edit',function () {
+        var address_id=$(this).attr('address_id');
+        var _token=$('#_token').val();
+        location.href="/user/addressup"+'/'+address_id;
+    })
+    //修改默认
+    $(document).on('click','.moren',function(){
+        var address_id=$(this).parents('.addr-list').find('.address_id').val();
+        console.log(address_id);
+        $.post(
+            "/user/addressmoren",
+            {address_id:address_id,_token:'{{csrf_token()}}'},
+            function(res){
+                alert('改变默认地址成功');
+                history.go(0);
+                //console.log(res)
             }
-          ];
-          var groups = [buttons1, buttons2];
-          $.actions(groups);
-    });
+        )
+    })
 </script>
-<script src="js/jquery-1.8.3.min.js"></script>
+<script src="{{url('js/jquery-1.8.3.min.js')}}"></script>
 <script>
     var $$=jQuery.noConflict();
     $$(document).ready(function(){

@@ -7,7 +7,6 @@ use App\Model\Goods;
 use App\Model\Cart;
 class ShopController extends Controller
 {
-
     public function shopcontent($goods_id)
     {
 
@@ -63,11 +62,10 @@ class ShopController extends Controller
         }
         return view('shopcart',['goods'=>$goods,'price'=>$price]);
     }
-    //
+    //单删
     public function delcart(Request $request)
     {
         $goods_id=$request->goods_id;
-
         $data=Cart::where('goods_id','=',$goods_id)->delete();
         if($data){
             echo 1;
@@ -75,7 +73,7 @@ class ShopController extends Controller
             echo 2;
         }
 }
-        //批删
+    //批删
     public function somedel(Request $request)
     {
         $cart_id=explode(',',rtrim($request->cart_id,','));
@@ -86,7 +84,29 @@ class ShopController extends Controller
             echo 2;
         }
     }
-
-
-
+    //结算
+    public function pay(Request $request)
+    {
+        $cart_id=$request->cart_id;
+        echo $cart_id;
+    }
+    //结算
+    public function payment($id)
+    {
+        $cart_id=explode(',',rtrim($id,','));
+        $data=Cart::whereIn('cart_id',$cart_id)->get();
+// print_r($data);die;
+        $goods_id=[];
+        foreach($data as $k=>$v){
+            $goods_id[]=$v['goods_id'];
+        }
+        $goodsinfo=Goods::whereIn('goods_id',$goods_id)->get();
+        $goods=Goods::join('shop_cart','shop_goods.goods_id','=','shop_cart.goods_id')->get();
+        $price=0;
+        foreach($goods as $v){
+            $info=$price+=$v['self_price']*$v['buy_num'];
+        }
+        //print_r($goodsinfo);
+        return view('payment',['goodsinfo'=>$goodsinfo,'info'=>$info]);
+    }
 }

@@ -36,7 +36,7 @@
                         <input id="txtPassword" type="password" name="rigister_pwd" class="txtPassword" placeholder="密码" value="" maxlength="20" /><b></b>
                     </dl>
                     <dl>
-                        <input id="txtPassword" type="text" name="login_yan" class="txtYan" placeholder="验证" value="" maxlength="4" /><b></b>
+                        <input id="txtCode" type="text" name="login_yan" class="txtYan" placeholder="验证" value="" maxlength="4" /><b></b>
                         <img src="{{url('/verify/create')}}"  id="img" alt="">
                     </dl>
                 </li>
@@ -76,6 +76,7 @@
         $(document).on('click','#btnLogin',function(){
             var rigister_tel=$('#txtAccount').val();
             var rigister_pwd=$('#txtPassword').val();
+            var login_code=$('#txtCode').val();
             if(rigister_tel==''){
                 alert('请输入账号');
                 return false;
@@ -84,18 +85,25 @@
                 alert('请输入密码');
                 return false;
             }
+            if(login_code==''){
+                alert('请输入验证码');
+                return false;
+            }
             $.get(
                 "{{url('login/logindo')}}",
-                {rigister_tel:rigister_tel,rigister_pwd:rigister_pwd},
+                {rigister_tel:rigister_tel,rigister_pwd:rigister_pwd,login_code:login_code},
                 function(res){
                     if(res==1){
                         alert('用户名不存在');
                     }else if(res==2){
                         alert('密码错误');
-                    }else if(res=3){
+                    }else if(res==3){
                         alert('登录成功');
                         location.href="{{url('index/index')}}";
+                    }else if(res==4){
+                        alert('验证码错误');
                     }
+
                 }
             )
         })

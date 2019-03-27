@@ -66,16 +66,22 @@
                         <span  class='items' cate_id="{{$v->cate_id}}">{{$v->cate_name}}
                         </span></li>
                     @endforeach
+                    <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token()?>">
+
                 </ul>
             </div>
             </div>
             <div class="good-list-wrapper">
                 <div class="good-menu thin-bor-bottom">
                     <ul class="good-menu-list" id="ulOrderBy">
-                        <li orderflag="10" class="current"><a href="javascript:;">即将揭晓</a></li>
-                        <li orderflag="20"><a href="javascript:;">人气</a></li>
-                        <li orderflag="50"><a href="javascript:;">最新</a></li>
-                        <li orderflag="30"><a href="javascript:;">价值</a><span class="i-wrap"><i class="up"></i><i class="down"></i></span></li>
+                        <li orderflag="20" id="is_new" ><a href="javascript:;">新品</a>
+                            <span class="i-wrap" >
+                                <i class="up"  ></i>
+                                <i class="down"  ></i></span></li>
+                        <li orderflag="30">
+                            <a href="javascript:;" id="self_price">价值</a>
+                            <span class="i-wrap"><i class="up"></i>
+                                <i class="down"></i></span></li>
                         <!--价值(由高到低30,由低到高31)-->
                     </ul>
                 </div>
@@ -106,13 +112,13 @@
                                                     <li class="P-bar02"><em>7988</em>总需人次</li>
                                                     <li class="P-bar03"><em>646</em>剩余</li>
                                                 </ul>            
-                                            </div>           
-                                            <a codeid="12785750" class="" canbuy="646"><s></s></a>        
+                                            </div>
+                                            <a codeid="12785750" class="gRate" canbuy="646"  goods_id="{{$v->goods_id}}"><s class="gRate"></s></a>
                                         </div>    
                                     </div>
                                 </li>
                                 @endforeach
-                               
+                                    <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token()?>">
                             </ul>
                         </div>
                     </div>
@@ -126,7 +132,6 @@
             <ul>
                 <li class="f_home"><a href="{{url('index/index')}}" ><i></i>潮购</a></li>
                 <li class="f_announced"><a href="/v41/lottery/" class="hover"><i></i>全部商品</a></li>
-                <li class="f_single"><a href="{{url('share/share')}}" ><i></i>最新揭晓</a></li>
                 <li class="f_car"><a id="btnCart" href="{{url('shop/shopcart')}}" ><i></i>购物车</a></li>
                 <li class="f_personal"><a href="{{url('user/userpage')}}" ><i></i>我的潮购</a></li>
             </ul>
@@ -138,18 +143,71 @@
 <script src="{{url('layui/layui.js')}}"></script>
 <script src="{{url('js/lazyload.min.js')}}"></script>
 <script src="{{url('js/mui.min.js')}}"></script>
+<script src="{{url('js/jquery-1.8.3.min.js')}}"></script>
 <script>
-
-        jQuery(document).ready(function(){
-            $("img.lazy").lazyload({
-                placeholder : "images/loading2.gif",
-                effect: "fadeIn",
-            });
-
-
-        });
+    $(function(){
+        layui.use('layer',function(){
+            var layer=layui.layer;
+            $(document).on('click','.gRate',function(){
+                var goods_id=$(this).attr('goods_id');
+                var _token=$('#_token').val();
+                $.post(
+                    "{{url('shop/cartadd')}}",
+                    {goods_id:goods_id,_token:_token},
+                    function(res){
+                        if(res==1){
+                            layer.msg('添加购物车成功',{icon:1})
+                        }else if(res==2){
+                            layer.msg('添加购物车失败',{icon:2})
+                        }else if(res==3){
+                            layer.msg('请先登录',{icon:2,time:3000},function(){
+                                location.href="{{url('login/login')}}"
+                            })
+                        }
+                        //console.log(res)
+                    }
+                )
+            })
+        })
+    })
+    //最新
+    $(document).on('click',"#is_new",function(){
+        var _token=$("#_token").val();
+        $(this).css("color",'red');
+        $("#self_price").css("color",'');
+        $.post(
+            "{{url('all/isnew')}}",
+            {_token:_token},
+            function(res){
+                $(".good-list-inner").html(res);
+            }
+        )
+    });
+    //价格
+    $(document).on('click',"#self_price",function(){
+        var _token=$("#_token").val();
+        var self_price=$(this).next().html();
+        $("#is_new").css("color",'');
+        var type='';
+        if(self_price=='↑'){
+            type=1;
+            $(this).next().html("↓");
+        }else{
+            type=2;
+            $(this).next().html("↑");
+        }
+        $(this).css("color",'red');
+        $.post(
+            "{{url('all/price')}}",
+            {_token:_token,type:type},
+            function(res){
+                $(".good-list-inner").html(res);
+            }
+        )
+    });
 
 </script>
+
 <script>
     // 点击切换类别
     $('#sortListUl li').click(function(){
@@ -188,7 +246,7 @@
         }
     });
     /**
-     * 下拉刷新具体业务实现
+     * 下拉刷新具体业务实现5
      */
     function pulldownRefresh() {
         setTimeout(function() {

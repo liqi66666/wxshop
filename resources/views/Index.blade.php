@@ -60,124 +60,29 @@
 				</ul>
 			</section>
 		</div>
-		  <!--分类-->
-		  <div class="index-menu thin-bor-top thin-bor-bottom">
-            <ul class="menu-list">
-				@foreach($data as $v)
-                <li>
-                    <a href="{{url('all/allshop')}}" id="btnNew">
-                        <i class="xinpin"></i>
-                        <span class="title">{{$v->cate_name}}</span>
-                    </a>
-                </li>
-				@endforeach
-            </ul>
-        </div>
+
         <!--导航-->
         <div class="success-tip">
         	<div class="left-icon"></div>
         	<ul class="right-con">
 				<li>
 					<span style="color: #4E555E;">
-						<a href="./index.php?i=107&amp;c=entry&amp;id=10&amp;do=notice&amp;m=weliam_indiana" style="color: #4E555E;">恭喜<span class="username">啊啊啊</span>获得了<span>iphone7 红色 128G 闪耀你的眼</span></a>
+						<a href="./index.php?i=107&amp;c=entry&amp;id=10&amp;do=notice&amp;m=weliam_indiana" style="color: #4E555E;">恭喜<span class="username">李琦</span>获得了<span>iphone7 红色 128G 闪耀你的眼</span></a>
 					</span>
 				</li>
 				<li>
 					<span style="color: #4E555E;">
-						<a href="./index.php?i=107&amp;c=entry&amp;id=10&amp;do=notice&amp;m=weliam_indiana" style="color: #4E555E;">恭喜<span class="username">啊啊啊</span>获得了<span>iphone7 红色 128G 闪耀你的眼</span></a>
+						<a href="./index.php?i=107&amp;c=entry&amp;id=10&amp;do=notice&amp;m=weliam_indiana" style="color: #4E555E;">恭喜<span class="username">李琦</span>获得了<span>iphone8 红色 128G 闪耀你的眼</span></a>
 					</span>
 				</li>
 				<li>
 					<span style="color: #4E555E;">
-						<a href="./index.php?i=107&amp;c=entry&amp;id=10&amp;do=notice&amp;m=weliam_indiana" style="color: #4E555E;">恭喜<span class="username">啊啊啊</span>获得了<span>iphone7 红色 128G 闪耀你的眼</span></a>
+						<a href="./index.php?i=107&amp;c=entry&amp;id=10&amp;do=notice&amp;m=weliam_indiana" style="color: #4E555E;">恭喜<span class="username">李琦</span>获得了<span>iphone9 红色 128G 闪耀你的眼</span></a>
 					</span>
 				</li>
 			</ul>
         </div>
-        <!-- 倒計時 -->
-        <div class="endtime">
-        	<ul class="endtime-list clearfix">
-        		<li>
-        			<a href="" class="endtime-img"><img src="{{url('images/goods1.jpg')}}" alt=""></a>
-        			<p>倒计时</p>
-        			<div class="pro-state">			
-        				<div class="time-wrapper time" value="1500560400">				
-        					<em>02</em>				
-        					<span>:</span>				
-        					<em>24</em>				
-        					<span>:</span>				
-        					<em><i>8</i><i>4</i></em>			
-        				</div>		
-        			</div>
-        		</li>
-        		<li>
-        			<a href="" class="endtime-img"><img src="{{url('images/goods1.jpg')}}" alt=""></a>
-        			<p>倒计时</p>
-        			<div class="pro-state">			
-        				<div class="time-wrapper time" value="1500560400">				
-        					<em>02</em>				
-        					<span>:</span>				
-        					<em>24</em>				
-        					<span>:</span>				
-        					<em><i>8</i><i>4</i></em>			
-        				</div>		
-        			</div>
-        		</li>
-        		<li>
-        			<a href="" class="endtime-img"><img src="{{url('images/goods1.jpg')}}" alt=""></a>
-        			<p>倒计时</p>
-        			<div class="pro-state">			
-        				<div class="time-wrapper time" value="1500560400">				
-        					<em>02</em>				
-        					<span>:</span>				
-        					<em>24</em>				
-        					<span>:</span>				
-        					<em><i>8</i><i>4</i></em>			
-        				</div>		
-        			</div>
-        		</li>
-        		<li>
-        			<a href="" class="endtime-img"><img src="{{url('images/goods1.jpg')}}" alt=""></a>
-        			<p>倒计时</p>
-        			<div class="pro-state">			
-        				<div class="time-wrapper time"  value="1500560400">				
-        					<em>02</em>				
-        					<span>:</span>				
-        					<em>24</em>				
-        					<span>:</span>				
-        					<em><i>8</i><i>4</i></em>			
-        				</div>		
-        			</div>
-        		</li>
-        	</ul>
-        </div>
-        <!-- 热门推荐 -->
-        <div class="line hot">
-        	<div class="hot-content">
-        		<i></i>
-        		<span>潮人推荐</span>
-        		<div class="l-left"></div>
-        		<div class="l-right"></div>
-        	</div>
-        </div>
-        <div class="hot-wrapper">
-        	<ul class="clearfix">
-        		<li style="border-right:1px solid #e4e4e4; ">
-        			<a href="{{url('shop/shopcontent')}}">
-        				<p class="title">洋河 蓝色经典 海之蓝42度</p>
-        				<p class="subtitle">洋河的，棉柔的，口感绵柔浓香型</p>
-        				<img src="{{url('images/goods2.jpg')}}" alt="">
-        			</a>
-        		</li>
-        		<li>
-        			<a href="{{url('shop/shopcontent')}}">
-        				<p class="title">洋河 蓝色经典 海之蓝42度</p>
-        				<p class="subtitle">洋河的，棉柔的，口感绵柔浓香型</p>
-        				<img src="{{url('images/goods2.jpg')}}" alt="">
-        			</a>
-        		</li>
-        	</ul>
-        </div>
+
         <!-- 猜你喜欢 -->
         <div class="line guess">
         	<div class="hot-content">

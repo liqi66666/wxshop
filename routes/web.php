@@ -21,10 +21,14 @@ Route::prefix('shop')->group(function(){
     route::any('buycar','ShopController@buycar');
     route::any('delcart','ShopController@delcart');
     route::any('somedel','ShopController@somedel');
+    route::any('pay','ShopController@pay');
+    route::any('payment/{id}','ShopController@payment');
 });
 Route::prefix('all')->group(function () {
     route::any('allshop', 'AllController@allshop');
     route::any('allshopdo', 'AllController@allshopdo');
+    route::any('price', 'AllController@price');
+    route::any('isnew', 'AllController@isnew');
 
 });
 Route::prefix('share')->group(function () {
@@ -38,6 +42,12 @@ Route::prefix('login')->group(function () {
 Route::prefix('user')->group(function () {
     route::any('userpage', 'UserController@userpage');
     route::any('writeaddr', 'UserController@writeaddr');
+    route::any('writeaddrdo', 'UserController@writeaddrdo');
+    route::any('address', 'UserController@address');
+    route::any('addressdel', 'UserController@addressdel');
+    route::any('addressup/{id}', 'UserController@addressup');
+    route::any('addressupdo', 'UserController@addressupdo');
+    route::any('addressmoren', 'UserController@addressmoren');
 });
 Route::prefix('rigister')->group(function () {
     route::any('rigister', 'RigisterController@rigister');
@@ -45,3 +55,9 @@ Route::prefix('rigister')->group(function () {
     route::any('doregister', 'RigisterController@doregister');
 });
 route::any('verify/create', 'CaptchaController@create');
+Route::prefix('ailpay')->group(function () {
+    route::any('mobilepay', 'AilPayController@mobilepay');
+    route::any('return', 'AilPayController@re');
+    route::any('notify', 'AilPayController@notify');
+
+});

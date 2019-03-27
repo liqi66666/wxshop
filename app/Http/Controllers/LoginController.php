@@ -15,20 +15,23 @@ class LoginController extends Controller
     {
         $rigister_tel=$request->rigister_tel;
         $rigister_pwd=$request->rigister_pwd;
+        $code=$request->login_code;
         $res=rigister::where('rigister_tel',$rigister_tel)->first();
-        if(empty($res)){
-            echo 1;
+        if(session('verifycode')!=$code){
+            echo 4;
         }else{
-            $pwd=decrypt($res['rigister_pwd']);
-            if($rigister_pwd==$pwd){
-                session(['id'=>$res['rigister_id'],'rigister_tel'=>$rigister_tel]);
-
-                echo 3;
+            if(empty($res)){
+                echo 1;
             }else{
-                echo 2;
+                $pwd=decrypt($res['rigister_pwd']);
+                if($rigister_pwd==$pwd){
+                    session(['id'=>$res['rigister_id'],'rigister_tel'=>$rigister_tel]);
+                    echo 3;
+                }else{
+                    echo 2;
+                }
             }
         }
-        
     }
 
 }
