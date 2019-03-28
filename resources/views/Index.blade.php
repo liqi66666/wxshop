@@ -152,6 +152,7 @@
 </div>
     <script src="{{url('js/jquery-1.8.3.min.js')}}"></script>
     <script>
+		//添加购物车
         $(function(){
             layui.use('layer',function(){
                 var layer=layui.layer;

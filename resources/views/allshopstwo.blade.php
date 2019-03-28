@@ -1,4 +1,4 @@
-<div class="good-list-inner">
+<div class="good-list-inner" >
     <div id="pullrefresh" class="good-list-box  mui-content mui-scroll-wrapper">
         <div class="goodList mui-scroll">
             <ul id="ulGoodsList" class="mui-table-view mui-table-view-chevron">

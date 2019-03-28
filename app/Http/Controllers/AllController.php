@@ -6,15 +6,26 @@ use Illuminate\Http\Request;
 use App\Model\Goods;
 use App\Model\Category;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Cache;
     class AllController extends Controller
 {
         public function allshop(Request $request)
         {
-            $res=Goods::get();
+
+            $search=$request->search;
+            if(Cache::has($search)){
+                $res=Cache::get($search);
+//                echo 1;die;
+                dd($res);
+            }else{
+                $res=Goods::where('goods_name','like',"%$search%")->get();
+                Cache::put($search.$res,1000);
+//                echo 2;die;
+            }
+         //dd($res);
             $cate_id=$request->cate_id;
             $data=Category::get();
-            return  view('allshops',['res'=>$res,'data'=>$data]);
+            return  view('allshops',['res'=>$res,'data'=>$data,'search'=>$search]);
         }
 
         public function allshopdo(Request $request){

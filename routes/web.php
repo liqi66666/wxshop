@@ -54,10 +54,10 @@ Route::prefix('rigister')->group(function () {
     route::any('rigisterdo', 'RigisterController@rigisterdo');
     route::any('doregister', 'RigisterController@doregister');
 });
-route::any('verify/create', 'CaptchaController@create');
 Route::prefix('ailpay')->group(function () {
     route::any('mobilepay', 'AilPayController@mobilepay');
     route::any('return', 'AilPayController@re');
     route::any('notify', 'AilPayController@notify');
 
 });
+route::any('verify/create', 'CaptchaController@create');

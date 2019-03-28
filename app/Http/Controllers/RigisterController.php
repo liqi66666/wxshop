@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Validator;
 use App\common;
 class RigisterController extends Controller
 {
+    //注册页面
     public function rigister()
     {
         return  view('rigister');
     }
+    //注册执行
     public function rigisterdo(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -49,11 +51,12 @@ class RigisterController extends Controller
 
 
     }
-
+    // 手机验证码
     public function doregister(Request $request){
         $mobile=13131853261;
         $this->sendMobile($mobile);
     }
+    // 手机验证码
     private function sendMobile($mobile)
     {
         $host = env("MOBILE_HOST");

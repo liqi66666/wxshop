@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\DB;
 use App\Model\Rigister;
 class LoginController extends Controller
 {
+    //登录页面
     public function login()
     {
         return  view('login');
     }
+    //登录执行
     public function logindo(Request $request)
     {
         $rigister_tel=$request->rigister_tel;
